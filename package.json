@@ -1,0 +1,35 @@
+{
+  "name": "nexus-live",
+  "version": "1.0.0",
+  "description": "Nexus Elite — plataforma de overlays para transmissões ao vivo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"pnpm dev:server\" \"pnpm dev:client\"",
+    "dev:server": "node --watch --watch-path=server/index.js --watch-path=server/socketHandler.js --watch-path=server/state.js server/index.js",
+    "dev:client": "vite --config vite.config.js client"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "fs-extra": "^11.2.0",
+    "lottie-web": "^5.12.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.3",
+    "vite": "^5.1.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

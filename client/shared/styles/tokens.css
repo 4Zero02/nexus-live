@@ -1,0 +1,53 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
+:root {
+  /* Cores da Nexus Elite */
+  --color-brand:        #65b307;
+  --color-brand-dark:   #4a8205;
+  --color-brand-light:  #7fd408;
+
+  /* Escala de cinzas */
+  --color-bg:           #0a0a0a;
+  --color-surface:      #141414;
+  --color-surface-2:    #1e1e1e;
+  --color-surface-3:    #2a2a2a;
+  --color-border:       #2e2e2e;
+  --color-text:         #f0f0f0;
+  --color-text-muted:   #888888;
+
+  /* Feedback */
+  --color-success:      #65b307;
+  --color-danger:       #e53e3e;
+  --color-warning:      #d69e2e;
+
+  /* Tipografia */
+  --font-sans:          'Inter', system-ui, sans-serif;
+  --font-mono:          'JetBrains Mono', monospace;
+
+  /* Espaçamento base */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+
+  /* Raios */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+
+  /* Botões touch-friendly */
+  --btn-height-sm:  40px;
+  --btn-height-md:  52px;
+  --btn-height-lg:  64px;
+
+  /* Transições */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+}

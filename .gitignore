@@ -1,0 +1,15 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+
+# Runtime
+server/data/
+
+# Assets locais do designer
+assets/
+
+# Arquivos de desenvolvimento local
+CLAUDE.md
+docs/

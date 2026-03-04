@@ -1,0 +1,105 @@
+.nav {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-6);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-5);
+  flex-shrink: 0;
+}
+
+.logoLink {
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+}
+
+.logoBracket {
+  color: var(--color-brand);
+}
+
+.logoAccent {
+  color: var(--color-brand);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: var(--space-4);
+  flex: 1;
+}
+
+.link {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--color-text);
+  background: var(--color-surface-2);
+}
+
+.active {
+  color: var(--color-brand-light);
+  background: rgba(101, 179, 7, 0.08);
+}
+
+/* Hamburguer — apenas mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+  border-radius: var(--radius-sm);
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: background var(--transition-fast);
+}
+
+.hamburger:hover span {
+  background: var(--color-brand-light);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    height: 56px;
+    padding: 0 var(--space-4);
+  }
+
+  .links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}

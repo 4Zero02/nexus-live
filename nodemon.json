@@ -1,0 +1,4 @@
+{
+  "watch": ["server/index.js", "server/socketHandler.js", "server/state.js"],
+  "ext": "js,mjs"
+}
