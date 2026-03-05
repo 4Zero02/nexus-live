@@ -1,32 +1,15 @@
-:root {
-  --lt-accent: #e8b923;
-}
-
 @keyframes slideInLeft {
-  from { transform: translateX(-60px); }
-  to   { transform: translateX(0); }
+  from { transform: translateX(-60px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
 }
 
 @keyframes slideOutLeft {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-60px); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+  from { transform: translateX(0);     opacity: 1; }
+  to   { transform: translateX(-60px); opacity: 0; }
 }
 
 .container {
-  position: absolute;
-  bottom: 10%;
-  left: 5%;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: stretch;
   gap: 0;
@@ -34,21 +17,25 @@
 }
 
 .isVisible {
-  animation:
-    slideInLeft 0.4s ease-out forwards,
-    fadeIn 0.4s ease-out forwards;
+  animation: slideInLeft 0.4s ease-out forwards;
 }
 
 .isHidden {
-  animation:
-    slideOutLeft 0.3s ease-in forwards,
-    fadeOut 0.3s ease-in forwards;
-  pointer-events: none;
+  animation: slideOutLeft 0.3s ease-in forwards;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  align-self: center;
+  margin-right: 8px;
+  border-radius: 4px;
 }
 
 .bar {
   width: 5px;
-  background: var(--lt-accent);
+  background: var(--lt-accent, #65b307);
   border-radius: 3px 0 0 3px;
   flex-shrink: 0;
 }
@@ -65,7 +52,7 @@
 }
 
 .name {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: var(--lt-font, Inter), 'Segoe UI', Arial, sans-serif;
   font-size: 28px;
   font-weight: 700;
   color: #ffffff;
@@ -75,7 +62,7 @@
 }
 
 .title {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: var(--lt-font, Inter), 'Segoe UI', Arial, sans-serif;
   font-size: 15px;
   font-weight: 400;
   color: #b0b0b0;
