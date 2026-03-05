@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.88);
+  border-radius: 6px;
+  padding: 8px 20px;
+  border: 1.5px solid #65b307;
+}
+
+.time {
+  font-size: 28px;
+  font-weight: 800;
+  color: #65b307;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
