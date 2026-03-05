@@ -3,6 +3,7 @@ import { io } from 'socket.io-client'
 
 const useOverlaySocket = (overlayId) => {
   const [state, setState] = useState(null)
+  const [overlayType, setOverlayType] = useState(null)
   const [connected, setConnected] = useState(false)
   const socketRef = useRef(null)
 
@@ -21,7 +22,8 @@ const useOverlaySocket = (overlayId) => {
       setConnected(false)
     })
 
-    socket.on('overlay:sync', ({ state: syncedState }) => {
+    socket.on('overlay:sync', ({ type, state: syncedState }) => {
+      if (type) setOverlayType(type)
       setState(syncedState)
     })
 
@@ -48,7 +50,7 @@ const useOverlaySocket = (overlayId) => {
     }
   }, [overlayId])
 
-  return { state, emit, connected }
+  return { state, overlayType, emit, connected }
 }
 
 export default useOverlaySocket

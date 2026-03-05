@@ -1,21 +1,20 @@
 import { useParams } from 'react-router-dom'
 import useOverlaySocket from '@shared/useOverlaySocket'
+import { getOverlayType } from '@shared/overlayRegistry'
 import './output.css'
-import LowerThird from './overlays/LowerThird/LowerThird'
-
-const OVERLAYS = {
-  'lower-third': LowerThird,
-}
 
 const OutputApp = () => {
   const { id } = useParams()
-  const { state } = useOverlaySocket(id)
+  const { state, overlayType } = useOverlaySocket(id)
 
-  const OverlayComponent = OVERLAYS[id]
+  const registryEntry = overlayType ? getOverlayType(overlayType) : null
+  const OverlayComponent = registryEntry?.outputComponent ?? null
 
-  if (!OverlayComponent) return null
-
-  return <OverlayComponent state={state} />
+  return (
+    <div className="output-root">
+      {OverlayComponent && state && <OverlayComponent state={state} />}
+    </div>
+  )
 }
 
 export default OutputApp
