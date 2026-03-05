@@ -1,0 +1,96 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 8px 0;
+  gap: 0;
+}
+
+.event {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #65b307;
+  background: rgba(10, 10, 10, 0.88);
+  padding: 3px 12px;
+  border-radius: 3px 3px 0 0;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.board {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background: rgba(10, 10, 10, 0.88);
+  border-radius: 0 0 3px 3px;
+  border-top: 1.5px solid #65b307;
+  width: 100%;
+  overflow: hidden;
+}
+
+.team {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+}
+
+.teamReverse {
+  flex-direction: row-reverse;
+}
+
+.logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  background: rgba(101, 179, 7, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 800;
+  color: #65b307;
+  letter-spacing: 0.03em;
+}
+
+.name {
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.scores {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 10px;
+  flex-shrink: 0;
+}
+
+.score {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  min-width: 20px;
+  text-align: center;
+  display: inline-block;
+}
+
+.sep {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1;
+}
