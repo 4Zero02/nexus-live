@@ -1,8 +1,27 @@
 import { useState, useRef, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { io } from 'socket.io-client'
 import { OVERLAY_REGISTRY } from '@shared/overlayRegistry'
 import MobileDrawer from './MobileDrawer'
 import styles from './TopNav.module.css'
+
+const ConnectionBadge = () => {
+  const [connected, setConnected] = useState(false)
+
+  useEffect(() => {
+    const socket = io({ path: '/socket.io' })
+    socket.on('connect', () => setConnected(true))
+    socket.on('disconnect', () => setConnected(false))
+    return () => socket.disconnect()
+  }, [])
+
+  return (
+    <span
+      className={`${styles.connectionBadge} ${connected ? styles.badgeConnected : styles.badgeDisconnected}`}
+      title={connected ? 'Servidor conectado' : 'Servidor desconectado'}
+    />
+  )
+}
 
 const Logo = () => (
   <span className={styles.logo}>
@@ -87,6 +106,7 @@ const TopNav = () => {
           >
             Assets
           </NavLink>
+          <ConnectionBadge />
         </div>
 
         <button
