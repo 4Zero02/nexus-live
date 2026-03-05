@@ -1,10 +1,19 @@
+import { useMemo } from 'react'
 import useDashboardSocket from '@shared/useDashboardSocket'
 import { OVERLAY_REGISTRY } from '@shared/overlayRegistry'
 import OverlayCard from './OverlayCard'
 import styles from './DashboardPage.module.css'
 
 const DashboardPage = () => {
-  const { states, emit, connected } = useDashboardSocket()
+  const { instances, connected } = useDashboardSocket()
+
+  const countsByType = useMemo(() => {
+    const counts = {}
+    instances.forEach(({ type }) => {
+      counts[type] = (counts[type] ?? 0) + 1
+    })
+    return counts
+  }, [instances])
 
   return (
     <div className={styles.page}>
@@ -16,12 +25,11 @@ const DashboardPage = () => {
       </div>
 
       <div className={styles.grid}>
-        {OVERLAY_REGISTRY.map((overlay) => (
+        {OVERLAY_REGISTRY.map((type) => (
           <OverlayCard
-            key={overlay.id}
-            overlay={overlay}
-            state={states[overlay.id]}
-            emit={emit}
+            key={type.id}
+            type={type}
+            instanceCount={countsByType[type.id] ?? 0}
           />
         ))}
       </div>

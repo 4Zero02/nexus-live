@@ -1,56 +1,29 @@
-import { useNavigate } from 'react-router-dom'
-import Badge from '@shared/ui/Badge/Badge'
-import Button from '@shared/ui/Button/Button'
+import { Link } from 'react-router-dom'
 import styles from './OverlayCard.module.css'
 
-const OverlayCard = ({ overlay, state, emit }) => {
-  const navigate = useNavigate()
-  const isVisible = state?.visible ?? false
-
-  const handleToggle = (e) => {
-    e.stopPropagation()
-    if (isVisible) {
-      emit('overlay:hide', overlay.id)
-    } else {
-      emit('overlay:show', overlay.id)
-    }
-  }
+const OverlayCard = ({ type, instanceCount }) => {
+  const { id, label, description, preview: Preview } = type
 
   return (
-    <div className={styles.card}>
-      <div className={styles.header}>
-        <div className={styles.iconWrap}>
-          <span className={styles.icon}>{overlay.icon}</span>
-        </div>
-        <div className={styles.meta}>
-          <h3 className={styles.name}>{overlay.name}</h3>
-          <p className={styles.desc}>{overlay.description}</p>
-        </div>
+    <Link to={`/overlay/${id}`} className={styles.card}>
+      <div className={styles.preview}>
+        {Preview ? (
+          <Preview />
+        ) : (
+          <div className={styles.previewPlaceholder}>
+            <span className={styles.previewInitial}>{label[0]}</span>
+          </div>
+        )}
       </div>
 
-      <div className={styles.footer}>
-        <Badge variant={isVisible ? 'live' : 'offline'}>
-          {isVisible ? 'VISÍVEL' : 'OCULTO'}
-        </Badge>
-
-        <div className={styles.actions}>
-          <Button
-            variant={isVisible ? 'secondary' : 'primary'}
-            size="sm"
-            onClick={handleToggle}
-          >
-            {isVisible ? 'Esconder' : 'Mostrar'}
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate(`/control/${overlay.id}`)}
-          >
-            Controlar
-          </Button>
-        </div>
+      <div className={styles.body}>
+        <h3 className={styles.name}>{label}</h3>
+        <p className={styles.desc}>{description}</p>
+        <span className={styles.count}>
+          {instanceCount} {instanceCount === 1 ? 'instância' : 'instâncias'}
+        </span>
       </div>
-    </div>
+    </Link>
   )
 }
 

@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { io } from 'socket.io-client'
-import { OVERLAY_REGISTRY } from './overlayRegistry'
 
 const useDashboardSocket = () => {
-  const [states, setStates] = useState({})
+  const [instances, setInstances] = useState([])
   const [connected, setConnected] = useState(false)
   const socketRef = useRef(null)
 
@@ -13,35 +12,33 @@ const useDashboardSocket = () => {
 
     socket.on('connect', () => {
       setConnected(true)
-      OVERLAY_REGISTRY.forEach(({ id }) => {
-        socket.emit('overlay:sync', { overlayId: id })
-      })
+      socket.emit('instance:list', {})
     })
 
     socket.on('disconnect', () => setConnected(false))
 
-    socket.on('overlay:sync', ({ overlayId, state }) => {
-      setStates(prev => ({ ...prev, [overlayId]: state }))
+    socket.on('instances:data', (list) => {
+      setInstances(list)
     })
 
-    const handleUpdate = ({ overlayId, state }) => {
-      setStates(prev => ({ ...prev, [overlayId]: state }))
-    }
+    socket.on('instance:created', (instance) => {
+      setInstances((prev) => [...prev, instance])
+    })
 
-    socket.on('overlay:show', handleUpdate)
-    socket.on('overlay:hide', handleUpdate)
-    socket.on('overlay:update', handleUpdate)
+    socket.on('instance:deleted', ({ id }) => {
+      setInstances((prev) => prev.filter((inst) => inst.id !== id))
+    })
 
     return () => socket.disconnect()
   }, [])
 
-  const emit = useCallback((event, overlayId, data = {}) => {
+  const emit = useCallback((event, data = {}) => {
     if (socketRef.current?.connected) {
-      socketRef.current.emit(event, { overlayId, ...data })
+      socketRef.current.emit(event, data)
     }
   }, [])
 
-  return { states, emit, connected }
+  return { instances, emit, connected }
 }
 
 export default useDashboardSocket
