@@ -8,7 +8,7 @@ export const setupSocketHandler = (io) => {
       if (!overlayId) return
       socket.join(overlayId)
       const instance = await getState(overlayId)
-      socket.emit('overlay:sync', { overlayId, type: instance?.type ?? null, state: instance?.state ?? null })
+      socket.emit('overlay:sync', { overlayId, type: instance?.type ?? null, name: instance?.name ?? null, state: instance?.state ?? null })
       console.log(`[socket] Sync enviado para ${overlayId}:`, instance?.state)
     })
 
