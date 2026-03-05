@@ -1,6 +1,9 @@
 import LowerThird from '@output/overlays/LowerThird/LowerThird'
 import LowerThirdControl from '@control/overlays/LowerThird/LowerThirdControl'
 import LowerThirdPreview from '@control/overlays/LowerThird/LowerThirdPreview'
+import SocialBug from '@output/overlays/SocialBug/SocialBug'
+import SocialBugControl from '@control/overlays/SocialBug/SocialBugControl'
+import SocialBugPreview from '@control/overlays/SocialBug/SocialBugPreview'
 
 export const OVERLAY_REGISTRY = [
   {
@@ -23,9 +26,9 @@ export const OVERLAY_REGISTRY = [
     id: 'social-bug',
     label: 'Social Bug',
     description: 'Handle de rede social com auto-hide',
-    preview: null,
-    outputComponent: null,
-    controlComponent: null,
+    preview: SocialBugPreview,
+    outputComponent: SocialBug,
+    controlComponent: SocialBugControl,
     defaultState: {
       visible: false,
       platform: 'instagram',
