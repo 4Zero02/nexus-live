@@ -1,10 +1,6 @@
 import { NavLink } from 'react-router-dom'
+import { OVERLAY_REGISTRY } from '@shared/overlayRegistry'
 import styles from './MobileDrawer.module.css'
-
-const NAV_ITEMS = [
-  { to: '/dashboard', label: 'Overlays', icon: '▦' },
-  { to: '/assets', label: 'Assets', icon: '◈' },
-]
 
 const MobileDrawer = ({ open, onClose }) => {
   if (!open) return null
@@ -22,17 +18,39 @@ const MobileDrawer = ({ open, onClose }) => {
         </div>
 
         <nav className={styles.nav}>
-          {NAV_ITEMS.map(({ to, label, icon }) => (
+          <NavLink
+            to="/dashboard"
+            onClick={onClose}
+            className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ''}`}
+          >
+            <span className={styles.icon}>▦</span>
+            <span>Dashboard</span>
+          </NavLink>
+
+          <div className={styles.sectionLabel}>Overlays</div>
+
+          {OVERLAY_REGISTRY.map(({ id, label }) => (
             <NavLink
-              key={to}
-              to={to}
+              key={id}
+              to={`/overlay/${id}`}
               onClick={onClose}
-              className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ''}`}
+              className={({ isActive }) => `${styles.item} ${styles.subItem} ${isActive ? styles.active : ''}`}
             >
-              <span className={styles.icon}>{icon}</span>
+              <span className={styles.icon}>◈</span>
               <span>{label}</span>
             </NavLink>
           ))}
+
+          <div className={styles.sectionDivider} />
+
+          <NavLink
+            to="/assets"
+            onClick={onClose}
+            className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ''}`}
+          >
+            <span className={styles.icon}>◈</span>
+            <span>Assets</span>
+          </NavLink>
         </nav>
       </div>
     </div>

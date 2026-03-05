@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useState, useRef, useEffect } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { OVERLAY_REGISTRY } from '@shared/overlayRegistry'
 import MobileDrawer from './MobileDrawer'
 import styles from './TopNav.module.css'
 
@@ -12,6 +13,62 @@ const Logo = () => (
   </span>
 )
 
+const OverlaysDropdown = () => {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  return (
+    <div className={styles.dropdown} ref={ref}>
+      <button
+        className={`${styles.link} ${styles.dropdownTrigger}`}
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        Overlays
+        <span className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`}>▾</span>
+      </button>
+
+      {open && (
+        <div className={styles.dropdownMenu}>
+          {OVERLAY_REGISTRY.map(({ id, label, description }) => (
+            <NavLink
+              key={id}
+              to={`/overlay/${id}`}
+              className={({ isActive }) =>
+                `${styles.dropdownItem} ${isActive ? styles.active : ''}`
+              }
+              onClick={() => setOpen(false)}
+            >
+              <span className={styles.dropdownLabel}>{label}</span>
+              <span className={styles.dropdownDesc}>{description}</span>
+            </NavLink>
+          ))}
+          <div className={styles.dropdownDivider} />
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              `${styles.dropdownItem} ${isActive ? styles.active : ''}`
+            }
+            onClick={() => setOpen(false)}
+          >
+            <span className={styles.dropdownLabel}>Ver todos</span>
+            <span className={styles.dropdownDesc}>Dashboard com todos os tipos</span>
+          </NavLink>
+        </div>
+      )}
+    </div>
+  )
+}
+
 const TopNav = () => {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -23,12 +80,7 @@ const TopNav = () => {
         </NavLink>
 
         <div className={styles.links}>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
-          >
-            Overlays
-          </NavLink>
+          <OverlaysDropdown />
           <NavLink
             to="/assets"
             className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
