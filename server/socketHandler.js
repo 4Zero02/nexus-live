@@ -1,4 +1,4 @@
-import { getState, setState } from './state.js'
+import { getState, setState, createInstance, deleteInstance, getAllInstances, getInstancesByType } from './state.js'
 
 export const setupSocketHandler = (io) => {
   io.on('connection', (socket) => {
@@ -28,6 +28,30 @@ export const setupSocketHandler = (io) => {
       const instance = await setState(overlayId, data)
       io.to(overlayId).emit('overlay:update', { overlayId, state: instance?.state })
       console.log(`[socket] update → ${overlayId}:`, data)
+    })
+
+    socket.on('instance:create', async ({ type, name, defaultState = {} }) => {
+      const instance = await createInstance(type, name, defaultState)
+      socket.emit('instance:created', instance)
+      console.log(`[socket] instance:created → ${instance.id}`)
+    })
+
+    socket.on('instance:delete', async ({ id }) => {
+      const deleted = await deleteInstance(id)
+      if (deleted) {
+        socket.emit('instance:deleted', { id })
+        console.log(`[socket] instance:deleted → ${id}`)
+      } else {
+        console.warn(`[socket] instance:delete — ID não encontrado: ${id}`)
+      }
+    })
+
+    socket.on('instance:list', async ({ type } = {}) => {
+      const instances = type
+        ? await getInstancesByType(type)
+        : await getAllInstances()
+      socket.emit('instances:data', instances)
+      console.log(`[socket] instances:data → ${instances.length} instância(s)${type ? ` do tipo "${type}"` : ''}`)
     })
 
     socket.on('disconnect', () => {
