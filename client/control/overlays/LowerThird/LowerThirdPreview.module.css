@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+}
+
+.bar {
+  width: 4px;
+  background: #65b307;
+  border-radius: 3px 0 0 3px;
+  flex-shrink: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 12px;
+  background: rgba(10, 10, 10, 0.82);
+  border-radius: 0 4px 4px 0;
+  flex: 1;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.title {
+  font-size: 10px;
+  font-weight: 400;
+  color: #b0b0b0;
+  line-height: 1.4;
+  margin-top: 2px;
+}

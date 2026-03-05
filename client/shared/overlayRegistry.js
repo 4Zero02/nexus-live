@@ -1,12 +1,13 @@
 import LowerThird from '@output/overlays/LowerThird/LowerThird'
 import LowerThirdControl from '@control/overlays/LowerThird/LowerThirdControl'
+import LowerThirdPreview from '@control/overlays/LowerThird/LowerThirdPreview'
 
 export const OVERLAY_REGISTRY = [
   {
     id: 'lower-third',
     label: 'Lower Third',
     description: 'Nome e cargo do apresentador ou entrevistado',
-    preview: null, // LowerThirdPreview — criado na Etapa 9
+    preview: LowerThirdPreview,
     outputComponent: LowerThird,
     controlComponent: LowerThirdControl,
     defaultState: {
