@@ -4,6 +4,9 @@ import LowerThirdPreview from '@control/overlays/LowerThird/LowerThirdPreview'
 import SocialBug from '@output/overlays/SocialBug/SocialBug'
 import SocialBugControl from '@control/overlays/SocialBug/SocialBugControl'
 import SocialBugPreview from '@control/overlays/SocialBug/SocialBugPreview'
+import Scoreboard from '@output/overlays/Scoreboard/Scoreboard'
+import ScoreboardControl from '@control/overlays/Scoreboard/ScoreboardControl'
+import ScoreboardPreview from '@control/overlays/Scoreboard/ScoreboardPreview'
 
 export const OVERLAY_REGISTRY = [
   {
@@ -41,9 +44,9 @@ export const OVERLAY_REGISTRY = [
     id: 'scoreboard',
     label: 'Scoreboard',
     description: 'Placar ao vivo com dois times',
-    preview: null,
-    outputComponent: null,
-    controlComponent: null,
+    preview: ScoreboardPreview,
+    outputComponent: Scoreboard,
+    controlComponent: ScoreboardControl,
     defaultState: {
       visible: false,
       primaryColor: '#65b307',
