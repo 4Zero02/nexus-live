@@ -5,6 +5,7 @@ import '@shared/styles/tokens.css'
 import OutputApp from './output/OutputApp'
 import Layout from './control/Layout/Layout'
 import DashboardPage from './control/pages/DashboardPage/DashboardPage'
+import OverlayTypePage from './control/pages/OverlayTypePage/OverlayTypePage'
 import OverlayControlPage from './control/pages/OverlayControlPage/OverlayControlPage'
 import AssetsPage from './control/pages/AssetsPage/AssetsPage'
 import StyleguidePage from './control/pages/StyleguidePage/StyleguidePage'
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
         <Route element={<Layout />}>
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/overlay/:typeId" element={<OverlayTypePage />} />
           <Route path="/control/:id" element={<OverlayControlPage />} />
           <Route path="/assets" element={<AssetsPage />} />
           <Route path="/styleguide" element={<StyleguidePage />} />
