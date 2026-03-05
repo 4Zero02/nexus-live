@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Button from '@shared/ui/Button/Button'
 import Input from '@shared/ui/Input/Input'
 import Card from '@shared/ui/Card/Card'
@@ -7,25 +6,27 @@ import { useToast } from '@shared/ui/Toast/useToast'
 import styles from './LowerThirdControl.module.css'
 
 const LowerThirdControl = ({ state, emit, connected }) => {
-  const [name, setName] = useState('')
-  const [title, setTitle] = useState('')
   const { toast } = useToast()
 
   const isVisible = state?.visible ?? false
+  const mainText = state?.mainText ?? ''
+  const secondText = state?.secondText ?? ''
+  const primaryColor = state?.primaryColor ?? '#65b307'
+  const font = state?.font ?? 'Inter'
+  const icon = state?.icon ?? ''
+
+  const update = (patch) => {
+    emit('overlay:update', { data: patch })
+  }
 
   const handleShow = () => {
-    emit('overlay:show', { data: { name, title } })
+    emit('overlay:show', {})
     toast.success('Lower Third exibido')
   }
 
   const handleHide = () => {
     emit('overlay:hide', {})
     toast.info('Lower Third ocultado')
-  }
-
-  const handleUpdate = () => {
-    emit('overlay:update', { data: { name, title } })
-    toast.success('Lower Third atualizado')
   }
 
   return (
@@ -40,18 +41,45 @@ const LowerThirdControl = ({ state, emit, connected }) => {
       <Card>
         <div className={styles.fields}>
           <Input
-            id="lt-name"
-            label="Nome"
+            id="lt-mainText"
+            label="Nome principal"
             placeholder="Ex: João Silva"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={mainText}
+            onChange={(e) => update({ mainText: e.target.value })}
           />
           <Input
-            id="lt-title"
+            id="lt-secondText"
             label="Título / Cargo"
             placeholder="Ex: Comentarista"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={secondText}
+            onChange={(e) => update({ secondText: e.target.value })}
+          />
+          <Input
+            id="lt-icon"
+            label="Ícone (nome do arquivo em /assets/images/)"
+            placeholder="Ex: instagram.png"
+            value={icon}
+            onChange={(e) => update({ icon: e.target.value || null })}
+          />
+          <div className={styles.colorRow}>
+            <label className={styles.colorLabel} htmlFor="lt-primaryColor">
+              Cor de destaque
+            </label>
+            <input
+              id="lt-primaryColor"
+              type="color"
+              className={styles.colorInput}
+              value={primaryColor}
+              onChange={(e) => update({ primaryColor: e.target.value })}
+            />
+            <span className={styles.colorValue}>{primaryColor}</span>
+          </div>
+          <Input
+            id="lt-font"
+            label="Fonte"
+            placeholder="Ex: Inter, Gotham, Roboto"
+            value={font}
+            onChange={(e) => update({ font: e.target.value })}
           />
         </div>
       </Card>
@@ -65,15 +93,6 @@ const LowerThirdControl = ({ state, emit, connected }) => {
           onClick={handleShow}
         >
           Mostrar
-        </Button>
-        <Button
-          variant="secondary"
-          size="lg"
-          fullWidth
-          disabled={!connected || !isVisible}
-          onClick={handleUpdate}
-        >
-          Atualizar
         </Button>
         <Button
           variant="danger"
