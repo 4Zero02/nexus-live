@@ -5,14 +5,14 @@ import './output.css'
 
 const OutputApp = () => {
   const { id } = useParams()
-  const { state, overlayType } = useOverlaySocket(id)
+  const { state, overlayType, emit } = useOverlaySocket(id)
 
   const registryEntry = overlayType ? getOverlayType(overlayType) : null
   const OverlayComponent = registryEntry?.outputComponent ?? null
 
   return (
     <div className="output-root">
-      {OverlayComponent && state && <OverlayComponent state={state} />}
+      {OverlayComponent && state && <OverlayComponent state={state} emit={emit} />}
     </div>
   )
 }
