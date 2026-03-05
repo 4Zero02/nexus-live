@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Button from '@shared/ui/Button/Button'
 import Input from '@shared/ui/Input/Input'
 import Card from '@shared/ui/Card/Card'
@@ -5,8 +6,25 @@ import Badge from '@shared/ui/Badge/Badge'
 import { useToast } from '@shared/ui/Toast/useToast'
 import styles from './LowerThirdControl.module.css'
 
+const FALLBACK_FONTS = ['Inter', 'Roboto', 'Montserrat', 'Oswald', 'Rajdhani']
+
 const LowerThirdControl = ({ state, emit, connected }) => {
   const { toast } = useToast()
+  const [images, setImages] = useState([])
+  const [fonts, setFonts] = useState(FALLBACK_FONTS)
+
+  useEffect(() => {
+    fetch('/assets/list')
+      .then(r => r.json())
+      .then(data => {
+        if (data.images?.length) setImages(data.images)
+        if (data.fonts?.length) {
+          const fontNames = data.fonts.map(f => f.replace(/\.[^.]+$/, ''))
+          setFonts([...new Set([...FALLBACK_FONTS, ...fontNames])])
+        }
+      })
+      .catch(err => console.warn('[LowerThirdControl] Falha ao carregar assets:', err))
+  }, [])
 
   const isVisible = state?.visible ?? false
   const mainText = state?.mainText ?? ''
@@ -54,13 +72,24 @@ const LowerThirdControl = ({ state, emit, connected }) => {
             value={secondText}
             onChange={(e) => update({ secondText: e.target.value })}
           />
-          <Input
-            id="lt-icon"
-            label="Ícone (nome do arquivo em /assets/images/)"
-            placeholder="Ex: instagram.png"
-            value={icon}
-            onChange={(e) => update({ icon: e.target.value || null })}
-          />
+
+          <div className={styles.fieldGroup}>
+            <label className={styles.selectLabel} htmlFor="lt-icon">
+              Ícone
+            </label>
+            <select
+              id="lt-icon"
+              className={styles.select}
+              value={icon}
+              onChange={(e) => update({ icon: e.target.value || null })}
+            >
+              <option value="">— Nenhum —</option>
+              {images.map(img => (
+                <option key={img} value={img}>{img}</option>
+              ))}
+            </select>
+          </div>
+
           <div className={styles.colorRow}>
             <label className={styles.colorLabel} htmlFor="lt-primaryColor">
               Cor de destaque
@@ -74,13 +103,22 @@ const LowerThirdControl = ({ state, emit, connected }) => {
             />
             <span className={styles.colorValue}>{primaryColor}</span>
           </div>
-          <Input
-            id="lt-font"
-            label="Fonte"
-            placeholder="Ex: Inter, Gotham, Roboto"
-            value={font}
-            onChange={(e) => update({ font: e.target.value })}
-          />
+
+          <div className={styles.fieldGroup}>
+            <label className={styles.selectLabel} htmlFor="lt-font">
+              Fonte
+            </label>
+            <select
+              id="lt-font"
+              className={styles.select}
+              value={font}
+              onChange={(e) => update({ font: e.target.value })}
+            >
+              {fonts.map(f => (
+                <option key={f} value={f}>{f}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </Card>
 
