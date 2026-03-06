@@ -7,6 +7,9 @@ import SocialBugPreview from '@control/overlays/SocialBug/SocialBugPreview'
 import Scoreboard from '@output/overlays/Scoreboard/Scoreboard'
 import ScoreboardControl from '@control/overlays/Scoreboard/ScoreboardControl'
 import ScoreboardPreview from '@control/overlays/Scoreboard/ScoreboardPreview'
+import CountdownTimer from '@output/overlays/CountdownTimer/CountdownTimer'
+import CountdownTimerControl from '@control/overlays/CountdownTimer/CountdownTimerControl'
+import CountdownTimerPreview from '@control/overlays/CountdownTimer/CountdownTimerPreview'
 
 export const OVERLAY_REGISTRY = [
   {
@@ -60,9 +63,9 @@ export const OVERLAY_REGISTRY = [
     id: 'countdown-timer',
     label: 'Countdown Timer',
     description: 'Contagem regressiva server-side',
-    preview: null,
-    outputComponent: null,
-    controlComponent: null,
+    preview: CountdownTimerPreview,
+    outputComponent: CountdownTimer,
+    controlComponent: CountdownTimerControl,
     defaultState: {
       visible: false,
       primaryColor: '#65b307',
