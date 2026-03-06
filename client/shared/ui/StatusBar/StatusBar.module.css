@@ -18,3 +18,14 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
+
+.banner {
+  width: 100%;
+  background: var(--color-danger);
+  color: #fff;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.375rem 1rem;
+  animation: blink 1.2s ease-in-out infinite;
+}
