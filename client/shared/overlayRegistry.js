@@ -13,6 +13,9 @@ import CountdownTimerPreview from '@control/overlays/CountdownTimer/CountdownTim
 import NewsTicker from '@output/overlays/NewsTicker/NewsTicker'
 import NewsTickerControl from '@control/overlays/NewsTicker/NewsTickerControl'
 import NewsTickerPreview from '@control/overlays/NewsTicker/NewsTickerPreview'
+import IntroOutro from '@output/overlays/IntroOutro/IntroOutro'
+import IntroOutroControl from '@control/overlays/IntroOutro/IntroOutroControl'
+import IntroOutroPreview from '@control/overlays/IntroOutro/IntroOutroPreview'
 
 export const OVERLAY_REGISTRY = [
   {
@@ -99,9 +102,9 @@ export const OVERLAY_REGISTRY = [
     id: 'intro-outro',
     label: 'Intro / Outro',
     description: 'Animação Lottie de abertura e encerramento',
-    preview: null,
-    outputComponent: null,
-    controlComponent: null,
+    preview: IntroOutroPreview,
+    outputComponent: IntroOutro,
+    controlComponent: IntroOutroControl,
     defaultState: {
       visible: false,
       introFile: null,
