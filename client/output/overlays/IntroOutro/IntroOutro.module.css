@@ -1,0 +1,18 @@
+.container {
+  width: 1920px;
+  height: 1080px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 150ms ease;
+}
+
+.isVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.isHidden {
+  opacity: 0;
+  pointer-events: none;
+}
