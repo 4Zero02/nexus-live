@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 0;
+}
+
+.ticker {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 36px;
+  overflow: hidden;
+  background: rgba(10, 10, 10, 0.92);
+  border-radius: 4px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0 12px;
+  background: #e11d48;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.track {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.text {
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.9;
+}
