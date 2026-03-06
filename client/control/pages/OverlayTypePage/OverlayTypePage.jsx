@@ -6,12 +6,14 @@ import Card from '@shared/ui/Card/Card'
 import Badge from '@shared/ui/Badge/Badge'
 import Button from '@shared/ui/Button/Button'
 import Input from '@shared/ui/Input/Input'
+import { useToast } from '@shared/ui/Toast/useToast'
 import styles from './OverlayTypePage.module.css'
 
 const OverlayTypePage = () => {
   const { typeId } = useParams()
   const overlayType = getOverlayType(typeId)
 
+  const { toast } = useToast()
   const [instances, setInstances] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [newName, setNewName] = useState('')
@@ -39,10 +41,12 @@ const OverlayTypePage = () => {
       setCreating(false)
       setShowForm(false)
       setNewName('')
+      toast.success(`Instância "${instance.name}" criada`)
     })
 
     socket.on('instance:deleted', ({ id }) => {
       setInstances((prev) => prev.filter((i) => i.id !== id))
+      toast.info('Instância removida')
     })
 
     return () => socket.disconnect()
