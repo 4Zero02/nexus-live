@@ -10,6 +10,9 @@ import ScoreboardPreview from '@control/overlays/Scoreboard/ScoreboardPreview'
 import CountdownTimer from '@output/overlays/CountdownTimer/CountdownTimer'
 import CountdownTimerControl from '@control/overlays/CountdownTimer/CountdownTimerControl'
 import CountdownTimerPreview from '@control/overlays/CountdownTimer/CountdownTimerPreview'
+import NewsTicker from '@output/overlays/NewsTicker/NewsTicker'
+import NewsTickerControl from '@control/overlays/NewsTicker/NewsTickerControl'
+import NewsTickerPreview from '@control/overlays/NewsTicker/NewsTickerPreview'
 
 export const OVERLAY_REGISTRY = [
   {
@@ -80,9 +83,9 @@ export const OVERLAY_REGISTRY = [
     id: 'news-ticker',
     label: 'News Ticker',
     description: 'Faixa de texto rolando na base da tela',
-    preview: null,
-    outputComponent: null,
-    controlComponent: null,
+    preview: NewsTickerPreview,
+    outputComponent: NewsTicker,
+    controlComponent: NewsTickerControl,
     defaultState: {
       visible: false,
       labelText: 'AO VIVO',
