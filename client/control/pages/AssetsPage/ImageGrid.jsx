@@ -36,6 +36,10 @@ const ImageGrid = ({ files }) => {
             src={`/assets/file/images/${selected}`}
             alt={selected}
             style={{ maxWidth: '100%', borderRadius: 'var(--radius-md)' }}
+            onError={(e) => {
+              e.target.style.display = 'none'
+              console.warn('[ImageGrid] imagem não encontrada:', selected)
+            }}
           />
         </AssetModal>
       )}
