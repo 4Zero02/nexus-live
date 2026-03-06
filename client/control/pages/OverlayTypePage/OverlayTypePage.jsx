@@ -108,7 +108,6 @@ const OverlayTypePage = () => {
             )}
           </h2>
           <Button
-            size="sm"
             onClick={() => setShowForm(true)}
             disabled={!connected || showForm}
           >

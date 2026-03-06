@@ -48,9 +48,9 @@ const OverlayControlPage = () => {
         <h1 className={styles.instanceName}>{instanceName ?? id}</h1>
         <div className={styles.outputBar}>
           <span className={styles.urlText}>{outputUrl}</span>
-          <Button variant="secondary" size="sm" onClick={handleCopyUrl}>Copiar URL</Button>
+          <Button variant="secondary" onClick={handleCopyUrl}>Copiar URL</Button>
           <a href={outputUrl} target="_blank" rel="noreferrer" className={styles.openLink}>
-            <Button variant="secondary" size="sm">Abrir output ↗</Button>
+            <Button variant="secondary">Abrir output ↗</Button>
           </a>
         </div>
       </div>
