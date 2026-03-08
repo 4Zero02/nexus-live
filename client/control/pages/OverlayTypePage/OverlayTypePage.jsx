@@ -21,6 +21,7 @@ const OverlayTypePage = () => {
   const [newName, setNewName] = useState('')
   const [creating, setCreating] = useState(false)
   const [connected, setConnected] = useState(false)
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null)
   const socketRef = useRef(null)
 
   useEffect(() => {
@@ -68,7 +69,13 @@ const OverlayTypePage = () => {
 
   const handleDelete = (id) => {
     if (!socketRef.current?.connected) return
+    setConfirmDeleteId(id)
+  }
+
+  const handleConfirmDelete = (id) => {
+    if (!socketRef.current?.connected) return
     socketRef.current.emit('instance:delete', { id })
+    setConfirmDeleteId(null)
   }
 
   if (!overlayType) {
@@ -160,17 +167,37 @@ const OverlayTypePage = () => {
                   </Badge>
                 </div>
                 <div className={styles.instanceActions}>
-                  <Link to={`/control/${instance.id}`} className={styles.controlLink}>
-                    Controlar →
-                  </Link>
-                  <button
-                    className={styles.deleteBtn}
-                    onClick={() => handleDelete(instance.id)}
-                    title="Deletar instância"
-                    disabled={!connected}
-                  >
-                    ✕
-                  </button>
+                  {confirmDeleteId === instance.id ? (
+                    <div className={styles.confirmDelete}>
+                      <span className={styles.confirmLabel}>Deletar?</span>
+                      <button
+                        className={styles.confirmBtn}
+                        onClick={() => handleConfirmDelete(instance.id)}
+                      >
+                        Sim
+                      </button>
+                      <button
+                        className={styles.cancelBtn}
+                        onClick={() => setConfirmDeleteId(null)}
+                      >
+                        Não
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <Link to={`/control/${instance.id}`} className={styles.controlLink}>
+                        Controlar →
+                      </Link>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => handleDelete(instance.id)}
+                        title="Deletar instância"
+                        disabled={!connected}
+                      >
+                        ✕
+                      </button>
+                    </>
+                  )}
                 </div>
               </Card>
             ))}

@@ -201,6 +201,57 @@
   cursor: not-allowed;
 }
 
+/* Confirmação de deleção inline */
+.confirmDelete {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.confirmLabel {
+  font-size: 13px;
+  color: var(--color-danger);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.confirmBtn {
+  background: var(--color-danger);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 52px;
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  transition: opacity var(--transition-fast);
+}
+
+.confirmBtn:hover {
+  opacity: 0.85;
+}
+
+.cancelBtn {
+  background: var(--color-surface-3);
+  color: var(--color-text-muted);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 52px;
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cancelBtn:hover {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+}
+
 /* Estado vazio */
 .empty {
   font-size: 14px;
