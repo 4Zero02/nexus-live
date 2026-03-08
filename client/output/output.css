@@ -1,8 +1,9 @@
-html, body, #root {
-  background: transparent !important;
+.output-root {
+  background: transparent;
   margin: 0;
   padding: 0;
   width: 1920px;
   height: 1080px;
   overflow: hidden;
+  position: relative;
 }

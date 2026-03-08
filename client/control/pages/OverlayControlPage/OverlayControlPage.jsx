@@ -55,14 +55,20 @@ const OverlayControlPage = () => {
         </div>
       </div>
 
-      <div className={styles.content}>
+      {!connected && (
+        <div className={styles.disconnectedBanner}>
+          Desconectado — controles desabilitados até reconectar
+        </div>
+      )}
+
+      <fieldset disabled={!connected} className={styles.controlsFieldset}>
         <ControlComponent
           overlayId={id}
           state={state}
           emit={emit}
           connected={connected}
         />
-      </div>
+      </fieldset>
     </div>
   )
 }
