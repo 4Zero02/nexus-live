@@ -7,6 +7,7 @@ import Badge from '@shared/ui/Badge/Badge'
 import Button from '@shared/ui/Button/Button'
 import Input from '@shared/ui/Input/Input'
 import { useToast } from '@shared/ui/Toast/useToast'
+import Spinner from '@shared/ui/Spinner/Spinner'
 import styles from './OverlayTypePage.module.css'
 
 const OverlayTypePage = () => {
@@ -15,6 +16,7 @@ const OverlayTypePage = () => {
 
   const { toast } = useToast()
   const [instances, setInstances] = useState([])
+  const [loadingInstances, setLoadingInstances] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [newName, setNewName] = useState('')
   const [creating, setCreating] = useState(false)
@@ -34,6 +36,7 @@ const OverlayTypePage = () => {
 
     socket.on('instances:data', (list) => {
       setInstances(list)
+      setLoadingInstances(false)
     })
 
     socket.on('instance:created', (instance) => {
@@ -142,7 +145,9 @@ const OverlayTypePage = () => {
           </form>
         )}
 
-        {instances.length === 0 && !showForm ? (
+        {loadingInstances ? (
+          <Spinner label="Carregando instâncias..." />
+        ) : instances.length === 0 && !showForm ? (
           <p className={styles.empty}>Nenhuma instância criada ainda.</p>
         ) : (
           <div className={styles.list}>

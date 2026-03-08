@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import useOverlaySocket from '@shared/useOverlaySocket'
 import { getOverlayType } from '@shared/overlayRegistry'
 import Button from '@shared/ui/Button/Button'
+import Spinner from '@shared/ui/Spinner/Spinner'
 import { useToast } from '@shared/ui/Toast/useToast'
 import styles from './OverlayControlPage.module.css'
 
@@ -18,7 +19,7 @@ const OverlayControlPage = () => {
   }
 
   if (!synced) {
-    return <div className={styles.loading}>Carregando...</div>
+    return <Spinner label="Carregando..." centered />
   }
 
   const registryEntry = getOverlayType(overlayType)
