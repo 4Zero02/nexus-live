@@ -21,3 +21,12 @@
     padding: var(--space-5) var(--space-4);
   }
 }
+
+.page {
+  animation: pageFadeIn 150ms ease-out;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
