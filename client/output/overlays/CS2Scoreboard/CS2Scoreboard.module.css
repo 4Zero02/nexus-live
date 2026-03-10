@@ -239,15 +239,20 @@
   flex-shrink: 0;
 }
 
+/* ─── Weapon icon ───────────────────────────────────────────── */
 .weapon {
-  font-size: 11px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.75);
-  white-space: nowrap;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.72);
   flex-shrink: 0;
 }
+
+/* Tint leve por categoria */
+.wpn_sniper  { color: rgba(200, 230, 255, 0.85); }
+.wpn_pistol  { color: rgba(255, 255, 255, 0.55); }
+.wpn_smg     { color: rgba(255, 220, 160, 0.80); }
+.wpn_shotgun { color: rgba(255, 190, 120, 0.80); }
+.wpn_lmg     { color: rgba(255, 150, 100, 0.85); }
 
 /* ─── Grenades ──────────────────────────────────────────────── */
 .grenades {
@@ -258,13 +263,18 @@
 }
 
 .grenade {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.grenadeCount {
   font-size: 8px;
   font-weight: 800;
-  padding: 1px 4px;
-  border-radius: 2px;
-  letter-spacing: 0.04em;
-  line-height: 14px;
-  text-transform: uppercase;
+  line-height: 1;
 }
 
 .smoke { background: rgba(120, 140, 165, 0.28); color: #9ab0c8; }
@@ -282,13 +292,12 @@
 }
 
 .equipIcon {
-  font-size: 8px;
-  font-weight: 800;
-  padding: 1px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 3px;
   border-radius: 2px;
-  letter-spacing: 0.04em;
-  line-height: 14px;
-  text-transform: uppercase;
+  line-height: 1;
 }
 
 .helmet { background: rgba(200, 170,  70, 0.22); color: #d4b84a; }
