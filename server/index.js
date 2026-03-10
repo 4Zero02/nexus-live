@@ -6,6 +6,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { setupSocketHandler } from './socketHandler.js'
 import { listAssets } from './assets.js'
+import { parse as parseCS2 } from './gsi/cs2Parser.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ASSETS_DIR = path.resolve(__dirname, '../assets')
@@ -58,6 +59,35 @@ app.get('/assets/file/:category/:filename', (req, res) => {
       res.status(404).json({ error: 'Arquivo não encontrado' })
     }
   })
+})
+
+// CS2 GSI — estado em memória
+global.cs2State = null
+
+// POST /gsi/cs2 — recebe payload do CS2 GSI
+app.post('/gsi/cs2', (req, res) => {
+  const token = req.body?.auth?.token
+  if (token !== 'nexus_gsi_token') {
+    console.warn('[CS2 GSI] Token inválido')
+    return res.status(401).json({ error: 'Token inválido' })
+  }
+
+  const parsed = parseCS2(req.body)
+  if (!parsed) return res.sendStatus(200)
+
+  global.cs2State = parsed
+  io.emit('cs2:gamestate', parsed)
+
+  for (const kill of parsed.kills) {
+    io.emit('cs2:kill', kill)
+  }
+
+  res.sendStatus(200)
+})
+
+// GET /gsi/cs2/state — retorna último estado conhecido
+app.get('/gsi/cs2/state', (_req, res) => {
+  res.json(global.cs2State)
 })
 
 setupSocketHandler(io)

@@ -3,6 +3,17 @@
 @import '@fontsource/inter/600.css';
 @import '@fontsource/inter/700.css';
 
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   /* Cores da Nexus Elite */
   --color-brand:        #65b307;

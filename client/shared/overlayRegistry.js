@@ -1,3 +1,6 @@
+import CS2Scoreboard from '@output/overlays/CS2Scoreboard/CS2Scoreboard'
+import CS2ScoreboardControl from '@control/overlays/CS2Scoreboard/CS2ScoreboardControl'
+import CS2ScoreboardPreview from '@control/overlays/CS2Scoreboard/CS2ScoreboardPreview'
 import LowerThird from '@output/overlays/LowerThird/LowerThird'
 import LowerThirdControl from '@control/overlays/LowerThird/LowerThirdControl'
 import LowerThirdPreview from '@control/overlays/LowerThird/LowerThirdPreview'
@@ -18,6 +21,23 @@ import IntroOutroControl from '@control/overlays/IntroOutro/IntroOutroControl'
 import IntroOutroPreview from '@control/overlays/IntroOutro/IntroOutroPreview'
 
 export const OVERLAY_REGISTRY = [
+  {
+    id: 'cs2-scoreboard',
+    label: 'CS2 Scoreboard',
+    description: 'Placar ao vivo via GSI — kills, deaths e assistências de cada jogador',
+    preview: CS2ScoreboardPreview,
+    outputComponent: CS2Scoreboard,
+    controlComponent: CS2ScoreboardControl,
+    defaultState: {
+      visible: false,
+      primaryColor: '#f0b429',
+      font: 'Inter',
+      teamCTName: 'CT',
+      teamTName: 'T',
+      teamCTLogo: null,
+      teamTLogo: null,
+    },
+  },
   {
     id: 'lower-third',
     label: 'Lower Third',

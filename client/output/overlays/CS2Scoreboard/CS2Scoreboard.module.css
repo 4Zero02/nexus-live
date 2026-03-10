@@ -1,0 +1,296 @@
+@keyframes slideDown {
+  from { transform: translateY(-16px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(0);     opacity: 1; }
+  to   { transform: translateY(-16px); opacity: 0; }
+}
+
+/* ─── Container ─────────────────────────────────────────────── */
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 860px;
+  font-family: var(--font, 'Inter'), 'Segoe UI', Arial, sans-serif;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.8));
+}
+
+.isVisible { animation: slideDown 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.isHidden  { animation: slideUp   0.25s ease-in forwards; }
+
+.waiting {
+  background: rgba(9, 11, 16, 0.94);
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 18px 40px;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-top: 2px solid var(--accent, #f0b429);
+  backdrop-filter: blur(10px);
+}
+
+/* ─── Header ────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: stretch;
+  height: 68px;
+  background: rgba(9, 11, 16, 0.97);
+  border-top: 2px solid var(--accent, #f0b429);
+}
+
+.headerCT,
+.headerT {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+}
+
+.headerCT { background: linear-gradient(90deg, rgba(91,141,217,0.10) 0%, transparent 100%); }
+.headerT  {
+  flex-direction: row-reverse;
+  background: linear-gradient(270deg, rgba(232,148,58,0.10) 0%, transparent 100%);
+}
+
+.headerCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 0 20px;
+  min-width: 148px;
+  border-left:  1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.timer {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.phase {
+  font-size: 8px;
+  font-weight: 800;
+  color: var(--accent, #f0b429);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.roundNum {
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.teamName {
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.score {
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Logo ──────────────────────────────────────────────────── */
+.logoBox {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.logoBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logoInitials {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.04em;
+}
+
+/* ─── Players ───────────────────────────────────────────────── */
+.players {
+  display: flex;
+}
+
+.ctCol,
+.tCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ctCol { border-right: 1px solid rgba(255, 255, 255, 0.05); }
+
+/* ─── Player Row ────────────────────────────────────────────── */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 12px;
+  background: rgba(9, 11, 16, 0.91);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.row:last-child { border-bottom: none; }
+
+.ctCol .row:nth-child(even),
+.tCol  .row:nth-child(even) {
+  background: rgba(14, 17, 24, 0.91);
+}
+
+.dead { opacity: 0.35; }
+
+/* Row lines */
+.main,
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.main   { height: 20px; }
+.detail { height: 16px; padding-left: 18px; }
+
+.tRow .main   { flex-direction: row-reverse; }
+.tRow .detail { flex-direction: row-reverse; padding-left: 0; padding-right: 18px; }
+
+/* ─── Player fields ─────────────────────────────────────────── */
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hp {
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  min-width: 26px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.tRow .hp { text-align: left; }
+
+.name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.kda {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.kda b       { color: #fff; font-weight: 700; min-width: 18px; text-align: center; }
+.deaths      { color: rgba(255,255,255,0.4); min-width: 18px; text-align: center; }
+.assists     { color: rgba(255,255,255,0.35); min-width: 18px; text-align: center; }
+.sep         { color: rgba(255,255,255,0.18); padding: 0 1px; }
+
+.money {
+  font-size: 11px;
+  font-weight: 700;
+  color: #5ec96e;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.weapon {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* ─── Grenades ──────────────────────────────────────────────── */
+.grenades {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.grenade {
+  font-size: 8px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.smoke { background: rgba(120, 140, 165, 0.28); color: #9ab0c8; }
+.flash { background: rgba(190, 215, 255, 0.20); color: #b8d4f8; }
+.he    { background: rgba(90,  180,  70, 0.25); color: #72c455; }
+.inc   { background: rgba(220,  90,  30, 0.28); color: #e87840; }
+.decoy { background: rgba(100, 100, 110, 0.22); color: #848490; }
+
+/* ─── Equipment ─────────────────────────────────────────────── */
+.equip {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.equipIcon {
+  font-size: 8px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.helmet { background: rgba(200, 170,  70, 0.22); color: #d4b84a; }
+.vest   { background: rgba(100, 140, 200, 0.20); color: #80aad8; }
+.kit    { background: rgba( 70, 200, 140, 0.20); color: #50cc90; }
