@@ -1,0 +1,107 @@
+@keyframes bombPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.75; transform: scale(1.05); }
+}
+
+.header {
+  display: flex;
+  align-items: stretch;
+  height: 80px;
+  background: rgba(8, 10, 15, 0.96);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.8));
+  min-width: 700px;
+}
+
+/* Gradiente lateral por time */
+.teamSide {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  background: linear-gradient(90deg, rgba(var(--side-color-r, 74), 158, 255, 0.08) 0%, transparent 100%);
+}
+
+.teamSideRight {
+  flex-direction: row-reverse;
+  background: linear-gradient(270deg, rgba(var(--side-color-r, 245), 166, 35, 0.08) 0%, transparent 100%);
+}
+
+.teamName {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.score {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Centro */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 28px;
+  min-width: 160px;
+  border-left:  1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.timerRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timerValue {
+  font-size: 32px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.timerFreeze {
+  font-size: 20px;
+  font-weight: 800;
+  color: #5bc0eb;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.timerBomb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #e53e3e;
+  letter-spacing: 0.04em;
+}
+
+.bombPulse {
+  animation: bombPulse 0.8s ease-in-out infinite;
+}
+
+.roundInfo {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}

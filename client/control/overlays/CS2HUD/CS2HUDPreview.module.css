@@ -1,0 +1,165 @@
+.wrapper {
+  width: 100%;
+  background: rgba(8, 10, 15, 0.95);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(12, 15, 22, 0.98);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 8px;
+}
+
+.teamCT,
+.teamT {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.teamT {
+  flex-direction: row-reverse;
+}
+
+.teamName {
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.score {
+  font-size: 26px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-width: 60px;
+}
+
+.timer {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.round {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Players */
+.players {
+  display: flex;
+  gap: 0;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.colRight {
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 8px 3px;
+  background: rgba(9, 11, 16, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition: opacity 0.3s;
+}
+
+.player:nth-child(even) {
+  background: rgba(14, 17, 24, 0.9);
+}
+
+.dead {
+  opacity: 0.35;
+}
+
+.hpBar {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1px;
+  margin-bottom: 3px;
+}
+
+.hpFill {
+  height: 100%;
+  border-radius: 1px;
+  transition: width 0.3s;
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.playerInfoRight {
+  flex-direction: row-reverse;
+}
+
+.playerName {
+  flex: 1;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playerKda {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Bottom */
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(4, 6, 10, 0.97);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.alive {
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.aliveLabel {
+  font-size: 8px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}

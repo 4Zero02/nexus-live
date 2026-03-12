@@ -1,0 +1,240 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.7));
+}
+
+/* ─── Team Header ─────────────────────────────────────────────────────────── */
+.teamHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(8, 10, 15, 0.97);
+  border-bottom: 2px solid;
+}
+
+.teamHeaderCT { border-top: none; }
+.teamHeaderT  { border-top: none; }
+
+.teamHeaderName {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.teamHeaderStats {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.teamStat {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.teamStatSep {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  padding: 0 1px;
+}
+
+/* ─── Player List ─────────────────────────────────────────────────────────── */
+.playerList {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Player Row ──────────────────────────────────────────────────────────── */
+.playerRow {
+  display: flex;
+  flex-direction: column;
+  background: rgba(9, 11, 16, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.playerRow:nth-child(even) {
+  background: rgba(14, 17, 24, 0.92);
+}
+
+.playerRow:last-child {
+  border-bottom: none;
+}
+
+.dead {
+  opacity: 0.45;
+}
+
+/* ─── HP Bar ──────────────────────────────────────────────────────────────── */
+.hpBarTrack {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  width: 100%;
+}
+
+.hpBarFill {
+  height: 100%;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* ─── Main line ───────────────────────────────────────────────────────────── */
+.mainLine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px 2px;
+  height: 22px;
+}
+
+.tRow .mainLine {
+  flex-direction: row-reverse;
+}
+
+.slot {
+  width: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.25);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.name {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.hpNum {
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  min-width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.tRow .hpNum {
+  text-align: left;
+}
+
+.skull {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.kd {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.kd b         { color: #fff; font-weight: 700; min-width: 16px; text-align: center; }
+.kdDeaths     { color: rgba(255, 255, 255, 0.4); min-width: 16px; text-align: center; }
+.kdSep        { color: rgba(255, 255, 255, 0.18); padding: 0 1px; }
+
+/* ─── Sub line ────────────────────────────────────────────────────────────── */
+.subLine {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px 5px 26px;
+  height: 18px;
+}
+
+.subLineRight {
+  flex-direction: row-reverse;
+  padding: 0 26px 5px 8px;
+}
+
+.money {
+  font-size: 10px;
+  font-weight: 700;
+  color: #5ec96e;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── Weapon ──────────────────────────────────────────────────────────────── */
+.weapon {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.72);
+  flex-shrink: 0;
+}
+
+.wpn_sniper  { color: rgba(200, 230, 255, 0.85); }
+.wpn_pistol  { color: rgba(255, 255, 255, 0.55); }
+.wpn_smg     { color: rgba(255, 220, 160, 0.80); }
+.wpn_shotgun { color: rgba(255, 190, 120, 0.80); }
+.wpn_lmg     { color: rgba(255, 150, 100, 0.85); }
+
+/* ─── Grenades ────────────────────────────────────────────────────────────── */
+.grenades {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.grenade {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 1px 2px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.grenadeCount {
+  font-size: 7px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.smoke { background: rgba(120, 140, 165, 0.28); color: #9ab0c8; }
+.flash { background: rgba(190, 215, 255, 0.20); color: #b8d4f8; }
+.he    { background: rgba(90,  180,  70, 0.25); color: #72c455; }
+.inc   { background: rgba(220,  90,  30, 0.28); color: #e87840; }
+.decoy { background: rgba(100, 100, 110, 0.22); color: #848490; }
+
+/* ─── Equipment ───────────────────────────────────────────────────────────── */
+.equip {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.equipIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 2px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.helmet { background: rgba(200, 170,  70, 0.22); color: #d4b84a; }
+.vest   { background: rgba(100, 140, 200, 0.20); color: #80aad8; }
+.kit    { background: rgba( 70, 200, 140, 0.20); color: #50cc90; }

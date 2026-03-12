@@ -1,11 +1,20 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { io } from 'socket.io-client'
+
+const MAX_KILLS = 10
 
 const useCS2GameState = () => {
   const [gameState, setGameState] = useState(null)
-  const [kills, setKills] = useState([])
   const [isConnected, setIsConnected] = useState(false)
+  const [kills, setKills] = useState([])
   const socketRef = useRef(null)
+
+  const addKill = useCallback((kill) => {
+    setKills((prev) => {
+      const next = [kill, ...prev]
+      return next.slice(0, MAX_KILLS)
+    })
+  }, [])
 
   useEffect(() => {
     const socket = io({ path: '/socket.io' })
@@ -31,17 +40,17 @@ const useCS2GameState = () => {
     })
 
     socket.on('cs2:kill', (kill) => {
-      setKills((prev) => [...prev.slice(-49), kill])
+      addKill(kill)
     })
 
     return () => {
       socket.disconnect()
     }
-  }, [])
+  }, [addKill])
 
   const economy = gameState?.economy ?? null
 
-  return { gameState, kills, economy, isConnected }
+  return { gameState, economy, isConnected, kills }
 }
 
 export default useCS2GameState

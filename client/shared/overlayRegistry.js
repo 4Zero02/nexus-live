@@ -1,6 +1,12 @@
+import CS2HUD from '@output/overlays/CS2HUD/CS2HUD'
+import CS2HUDControl from '@control/overlays/CS2HUD/CS2HUDControl'
+import CS2HUDPreview from '@control/overlays/CS2HUD/CS2HUDPreview'
 import CS2Scoreboard from '@output/overlays/CS2Scoreboard/CS2Scoreboard'
 import CS2ScoreboardControl from '@control/overlays/CS2Scoreboard/CS2ScoreboardControl'
 import CS2ScoreboardPreview from '@control/overlays/CS2Scoreboard/CS2ScoreboardPreview'
+import CS2RoundTimer from '@output/overlays/CS2RoundTimer/CS2RoundTimer'
+import CS2RoundTimerControl from '@control/overlays/CS2RoundTimer/CS2RoundTimerControl'
+import CS2RoundTimerPreview from '@control/overlays/CS2RoundTimer/CS2RoundTimerPreview'
 import LowerThird from '@output/overlays/LowerThird/LowerThird'
 import LowerThirdControl from '@control/overlays/LowerThird/LowerThirdControl'
 import LowerThirdPreview from '@control/overlays/LowerThird/LowerThirdPreview'
@@ -21,6 +27,38 @@ import IntroOutroControl from '@control/overlays/IntroOutro/IntroOutroControl'
 import IntroOutroPreview from '@control/overlays/IntroOutro/IntroOutroPreview'
 
 export const OVERLAY_REGISTRY = [
+  {
+    id: 'cs2-hud',
+    label: 'CS2 Observer HUD',
+    description: 'HUD completa para transmissão de partidas de CS2 com radar, placar e kill feed',
+    preview: CS2HUDPreview,
+    outputComponent: CS2HUD,
+    controlComponent: CS2HUDControl,
+    defaultState: {
+      visible: false,
+      teamCTName: 'Counter-Terrorists',
+      teamTName: 'Terrorists',
+      teamCTColor: '#4a9eff',
+      teamTColor: '#f5a623',
+      teamCTLogo: null,
+      teamTLogo: null,
+    },
+  },
+  {
+    id: 'cs2-round-timer',
+    label: 'CS2 Round Timer',
+    description: 'Tempo restante do round via GSI com aviso visual',
+    preview: CS2RoundTimerPreview,
+    outputComponent: CS2RoundTimer,
+    controlComponent: CS2RoundTimerControl,
+    defaultState: {
+      visible: false,
+      primaryColor: '#48bb78',
+      warningColor: '#e53e3e',
+      font: 'Inter',
+      warningThreshold: 10,
+    },
+  },
   {
     id: 'cs2-scoreboard',
     label: 'CS2 Scoreboard',

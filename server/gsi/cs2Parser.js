@@ -61,58 +61,10 @@ const categorizeWeapons = (weaponsObj) => {
   return { primary, secondary, grenades, hasBomb, hasDefuseKit }
 }
 
-const detectKills = (allplayers, previously) => {
-  if (!allplayers || !previously?.allplayers) return []
-
-  // Vítimas: saúde passou de >0 para 0
-  const victims = []
-  for (const [steamId, prev] of Object.entries(previously.allplayers)) {
-    const curr = allplayers[steamId]
-    if (!curr) continue
-    const prevHealth = prev.state?.health
-    const currHealth = curr.state?.health ?? 0
-    if (prevHealth !== undefined && prevHealth > 0 && currHealth === 0) {
-      victims.push({ steamId, name: curr.name ?? '' })
-    }
-  }
-
-  if (victims.length === 0) return []
-
-  // Atacantes: kill count aumentou neste payload
-  const killers = []
-  for (const [steamId, prev] of Object.entries(previously.allplayers)) {
-    const curr = allplayers[steamId]
-    if (!curr) continue
-    const prevKills = prev.match_stats?.kills
-    const currKills = curr.match_stats?.kills ?? 0
-    if (prevKills !== undefined && currKills > prevKills) {
-      const weapons = curr.weapons ? Object.values(curr.weapons) : []
-      const activeWeapon = weapons.find((w) => w.state === 'active')
-      const prevHs = prev.extra_info?.headshots
-      const currHs = curr.extra_info?.headshots ?? 0
-      killers.push({
-        name: curr.name ?? '',
-        weapon: activeWeapon?.name?.replace('weapon_', '') ?? 'unknown',
-        headshot: prevHs !== undefined && currHs > prevHs,
-      })
-    }
-  }
-
-  return victims.map((victim, i) => {
-    const killer = killers[i] ?? { name: null, weapon: 'unknown', headshot: false }
-    return {
-      attacker: killer.name,
-      victim: victim.name,
-      weapon: killer.weapon,
-      headshot: killer.headshot,
-      timestamp: Date.now(),
-    }
-  })
-}
 
 const parse = (payload) => {
   try {
-    const { map, round, allplayers, bomb, phase_countdowns, previously } = payload ?? {}
+    const { map, round, allplayers, bomb, phase_countdowns, player } = payload ?? {}
 
     if (!allplayers) return null
 
@@ -169,6 +121,15 @@ const parse = (payload) => {
         grenades: weapons.grenades,
         hasBomb: weapons.hasBomb,
         hasDefuseKit: p.state?.defusekit ?? false,
+        // Posição no mapa (requer allplayers_position no cfg)
+        position: p.position
+          ? (() => {
+              const parts = p.position.split(', ')
+              return parts.length === 3
+                ? { x: parseFloat(parts[0]), y: parseFloat(parts[1]), z: parseFloat(parts[2]) }
+                : null
+            })()
+          : null,
       }
     })
 
@@ -186,11 +147,46 @@ const parse = (payload) => {
       },
     }
 
-    const kills = detectKills(allplayers, previously)
+    // Jogador observado (payload.player — diferente de allplayers)
+    let observedPlayer = null
+    if (player && player.steamid) {
+      const weapons = categorizeWeapons(player.weapons)
+      observedPlayer = {
+        steamId: player.steamid,
+        name: player.name ?? '',
+        team: player.team ?? null,
+        health: player.state?.health ?? 0,
+        armor: player.state?.armor ?? 0,
+        hasHelmet: player.state?.helmet ?? false,
+        isAlive: (player.state?.health ?? 0) > 0,
+        kills: player.match_stats?.kills ?? 0,
+        deaths: player.match_stats?.deaths ?? 0,
+        assists: player.match_stats?.assists ?? 0,
+        roundDamage: player.state?.round_totaldmg ?? 0,
+        money: player.state?.money ?? 0,
+        primary: weapons.primary,
+        secondary: weapons.secondary,
+        grenades: weapons.grenades,
+        hasBomb: weapons.hasBomb,
+        hasDefuseKit: player.state?.defusekit ?? false,
+        // Ammo — disponível em player.weapons quando ativo
+        ammoClip: null,
+        ammoReserve: null,
+      }
+      // Ammo da arma ativa
+      if (player.weapons) {
+        const activeWeapon = Object.values(player.weapons).find((w) => w.state === 'active')
+        if (activeWeapon) {
+          observedPlayer.ammoClip = activeWeapon.ammo_clip ?? null
+          observedPlayer.ammoReserve = activeWeapon.ammo_reserve ?? null
+          observedPlayer.activeWeaponName = (activeWeapon.name ?? '').replace('weapon_', '')
+        }
+      }
+    }
 
     console.log(`[CS2 GSI] phase: ${match.phase}, round: ${match.roundNumber}`)
 
-    return { match, round: roundData, timer, players, economy, kills }
+    return { match, round: roundData, timer, players, economy, observedPlayer }
   } catch (err) {
     console.error('[CS2 GSI] Erro ao parsear payload:', err)
     return null
