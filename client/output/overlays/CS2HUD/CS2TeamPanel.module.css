@@ -1,89 +1,94 @@
 .panel {
   display: flex;
   flex-direction: column;
-  width: 340px;
+  width: 420px;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.8));
 }
 
 /* ─── Team Header ─────────────────────────────────────────────────────────── */
 .teamHeader {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 10px;
-  background: rgba(8, 10, 15, 0.97);
-  border-bottom: 2px solid;
+  flex-direction: column;
 }
 
-.teamHeaderCT { border-top: none; }
-.teamHeaderT  { border-top: none; }
-
-.teamHeaderName {
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-}
-
-.teamHeaderStats {
+.teamNameBand {
   display: flex;
   align-items: center;
-  gap: 3px;
+  justify-content: left;
+  padding: 8px 12px;
+  margin: 12px 0 6px;
+}
+
+.teamName {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.teamStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
 }
 
 .teamStat {
   font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   font-variant-numeric: tabular-nums;
 }
 
 .teamStatSep {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.2);
-  padding: 0 1px;
+  padding: 0 2px;
 }
 
 /* ─── Player List ─────────────────────────────────────────────────────────── */
 .playerList {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
 /* ─── Player Row ──────────────────────────────────────────────────────────── */
 .playerRow {
   display: flex;
   flex-direction: column;
-  background: rgba(9, 11, 16, 0.92);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(9, 11, 18, 0.72);
   transition: opacity 0.3s ease;
-  backdrop-filter: blur(6px);
-}
-
-.playerRow:nth-child(even) {
-  background: rgba(14, 17, 24, 0.92);
-}
-
-.playerRow:last-child {
-  border-bottom: none;
+  backdrop-filter: blur(8px);
 }
 
 .dead {
-  opacity: 0.45;
+  opacity: 0.42;
 }
 
 /* ─── HP Bar ──────────────────────────────────────────────────────────────── */
 .hpBarTrack {
-  height: 2px;
+  height: 3px;
   background: rgba(255, 255, 255, 0.06);
   width: 100%;
 }
 
+.hpBarReverse {
+  direction: rtl;
+}
+
 .hpBarFill {
   height: 100%;
-  transition: width 0.3s ease, background 0.3s ease;
+  transition: width 0.25s ease, background 0.25s ease;
 }
 
 /* ─── Main line ───────────────────────────────────────────────────────────── */
@@ -91,52 +96,62 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 8px 2px;
-  height: 22px;
+  padding: 7px 10px 3px;
+  min-height: 28px;
 }
 
-.tRow .mainLine {
+.mainLineRight {
   flex-direction: row-reverse;
 }
 
 .slot {
-  width: 14px;
-  font-size: 10px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.25);
+  width: 16px;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.30);
   text-align: center;
   flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 .name {
   flex: 1;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: #fff;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   letter-spacing: 0.01em;
+  min-width: 0;
 }
 
 .hpNum {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  min-width: 24px;
+  min-width: 26px;
   text-align: right;
   flex-shrink: 0;
 }
 
-.tRow .hpNum {
+.mainLineRight .hpNum {
   text-align: left;
 }
 
-.skull {
+.deadWrapper {
   display: flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.35);
   flex-shrink: 0;
+  width: 26px;
+  justify-content: center;
+}
+
+.deadImg {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  opacity: 0.7;
 }
 
 .kd {
@@ -148,22 +163,45 @@
   flex-shrink: 0;
 }
 
-.kd b         { color: #fff; font-weight: 700; min-width: 16px; text-align: center; }
-.kdDeaths     { color: rgba(255, 255, 255, 0.4); min-width: 16px; text-align: center; }
-.kdSep        { color: rgba(255, 255, 255, 0.18); padding: 0 1px; }
+.kd b {
+  color: #fff;
+  font-weight: 700;
+  min-width: 16px;
+  text-align: center;
+}
+
+.kdDeaths {
+  color: rgba(255, 255, 255, 0.38);
+  min-width: 16px;
+  text-align: center;
+}
+
+.kdSep {
+  color: rgba(255, 255, 255, 0.15);
+  padding: 0 1px;
+}
+
+/* ─── Weapon image ────────────────────────────────────────────────────────── */
+.weaponImg {
+  width: 36px;
+  height: 16px;
+  object-fit: contain;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
 
 /* ─── Sub line ────────────────────────────────────────────────────────────── */
 .subLine {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 0 8px 5px 26px;
-  height: 18px;
+  padding: 0 10px 7px 28px;
+  min-height: 20px;
 }
 
 .subLineRight {
   flex-direction: row-reverse;
-  padding: 0 26px 5px 8px;
+  padding: 0 28px 7px 10px;
 }
 
 .money {
@@ -175,25 +213,11 @@
   flex-shrink: 0;
 }
 
-/* ─── Weapon ──────────────────────────────────────────────────────────────── */
-.weapon {
-  display: flex;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.72);
-  flex-shrink: 0;
-}
-
-.wpn_sniper  { color: rgba(200, 230, 255, 0.85); }
-.wpn_pistol  { color: rgba(255, 255, 255, 0.55); }
-.wpn_smg     { color: rgba(255, 220, 160, 0.80); }
-.wpn_shotgun { color: rgba(255, 190, 120, 0.80); }
-.wpn_lmg     { color: rgba(255, 150, 100, 0.85); }
-
 /* ─── Grenades ────────────────────────────────────────────────────────────── */
 .grenades {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
   flex-shrink: 0;
 }
 
@@ -201,28 +225,54 @@
   display: flex;
   align-items: center;
   gap: 1px;
-  padding: 1px 2px;
-  border-radius: 2px;
+  padding: 1px 3px;
+  border-radius: 3px;
   line-height: 1;
+}
+
+.grenadeImg {
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
 }
 
 .grenadeCount {
   font-size: 7px;
   font-weight: 800;
   line-height: 1;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.smoke { background: rgba(120, 140, 165, 0.28); color: #9ab0c8; }
-.flash { background: rgba(190, 215, 255, 0.20); color: #b8d4f8; }
-.he    { background: rgba(90,  180,  70, 0.25); color: #72c455; }
-.inc   { background: rgba(220,  90,  30, 0.28); color: #e87840; }
-.decoy { background: rgba(100, 100, 110, 0.22); color: #848490; }
+/* Grenade category backgrounds */
+.smokegrenade {
+  background: rgba(120, 140, 165, 0.30);
+}
+
+.flashbang {
+  background: rgba(190, 215, 255, 0.22);
+}
+
+.hegrenade {
+  background: rgba(90, 180, 70, 0.28);
+}
+
+.molotov {
+  background: rgba(220, 90, 30, 0.30);
+}
+
+.incgrenade {
+  background: rgba(220, 90, 30, 0.30);
+}
+
+.decoy {
+  background: rgba(100, 100, 110, 0.22);
+}
 
 /* ─── Equipment ───────────────────────────────────────────────────────────── */
 .equip {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
   flex-shrink: 0;
 }
 
@@ -230,11 +280,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1px 2px;
-  border-radius: 2px;
+  padding: 2px 3px;
+  border-radius: 3px;
   line-height: 1;
 }
 
-.helmet { background: rgba(200, 170,  70, 0.22); color: #d4b84a; }
-.vest   { background: rgba(100, 140, 200, 0.20); color: #80aad8; }
-.kit    { background: rgba( 70, 200, 140, 0.20); color: #50cc90; }
+.equipImg {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+}
+
+.helmet {
+  background: rgba(200, 170, 70, 0.22);
+}
+
+.vest {
+  background: rgba(100, 140, 200, 0.20);
+}
+
+.kit {
+  background: rgba(70, 200, 140, 0.22);
+}

@@ -100,63 +100,6 @@
   padding: var(--space-3) 0;
 }
 
-/* Kills list */
-.killsList {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.killItem {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 6px;
-  background: var(--color-surface-3);
-  border-radius: 4px;
-  font-size: 12px;
-}
-
-.killAttacker {
-  font-weight: 600;
-  color: var(--color-text);
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.killArrow {
-  color: var(--color-text-muted);
-  flex-shrink: 0;
-}
-
-.killVictim {
-  font-weight: 500;
-  color: var(--color-text-muted);
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.killWeapon {
-  font-size: 11px;
-  color: var(--color-text-muted);
-  font-family: monospace;
-  flex-shrink: 0;
-}
-
-.killHs {
-  font-size: 10px;
-  font-weight: 700;
-  color: #e8d44d;
-  background: rgba(232, 212, 77, 0.12);
-  padding: 1px 4px;
-  border-radius: 2px;
-  flex-shrink: 0;
-}
-
 /* Teams grid */
 .teamsGrid {
   display: grid;
@@ -165,9 +108,7 @@
 }
 
 @media (max-width: 480px) {
-  .teamsGrid {
-    grid-template-columns: 1fr;
-  }
+  .teamsGrid { grid-template-columns: 1fr; }
 }
 
 .teamFields {
@@ -205,6 +146,222 @@
   font-family: monospace;
   color: var(--color-text-muted);
   min-width: 56px;
+}
+
+/* Logo row */
+.logoRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.logoLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.select {
+  width: 100%;
+  background: var(--color-surface-3);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Series */
+.seriesRow {
+  margin-top: var(--space-2);
+}
+
+.seriesScoreRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.seriesTeam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.seriesTeamLabel {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.scoreButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.scoreBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-3);
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.scoreBtn:hover {
+  background: var(--color-surface-2);
+}
+
+.seriesScoreNum {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  min-width: 28px;
+  text-align: center;
+}
+
+.seriesSep {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Map form */
+.mapForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.mapFormRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.selectSmall {
+  flex: 1;
+  background: var(--color-surface-3);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.scoreInput {
+  width: 52px;
+  background: var(--color-surface-3);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.scoreInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.scoreDash {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* Map list */
+.mapList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mapItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 10px;
+  background: var(--color-surface-3);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.mapItemIndex {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  min-width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mapItemName {
+  font-weight: 700;
+  color: var(--color-text);
+  flex: 1;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.mapItemPick {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.mapItemScore {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.mapItemRemove {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.mapItemRemove:hover {
+  color: #e53e3e;
+  background: rgba(229, 62, 62, 0.1);
 }
 
 /* Actions */

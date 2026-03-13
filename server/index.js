@@ -68,8 +68,12 @@ app.get('/assets/file/:category/*', (req, res) => {
 
 // CS2 GSI — estado em memória
 global.cs2State = null
-// Mapeamento steamId -> kills para detecção de kills
-let prevKillsMap = {}
+
+// Captura one-shot do payload bruto para examples/cs2-payload.json
+// Só captura quando a bomba está plantada (payload rico, meio de jogo)
+const EXAMPLES_DIR = path.resolve(__dirname, '../examples')
+const PAYLOAD_CAPTURE_PATH = path.join(EXAMPLES_DIR, 'cs2-payload.json')
+let payloadCaptured = false
 
 // POST /gsi/cs2 — recebe payload do CS2 GSI
 app.post('/gsi/cs2', (req, res) => {
@@ -79,64 +83,20 @@ app.post('/gsi/cs2', (req, res) => {
     return res.status(401).json({ error: 'Token inválido' })
   }
 
-  const parsed = parseCS2(req.body)
-  if (!parsed) return res.sendStatus(200)
-
-  // Detectar kills via diff de match_stats.kills
-  const allplayers = req.body?.allplayers ?? {}
-  const currentKillsMap = {}
-  for (const [steamId, p] of Object.entries(allplayers)) {
-    currentKillsMap[steamId] = p.match_stats?.kills ?? 0
-  }
-
-  for (const [steamId, currentKills] of Object.entries(currentKillsMap)) {
-    const prevKills = prevKillsMap[steamId] ?? currentKills
-    if (currentKills > prevKills) {
-      // Kill detectada — descobrir vítima via previously se disponível
-      const previously = req.body?.previously?.allplayers ?? {}
-      // Tentar identificar vítima: jogador que perdeu HP e morreu
-      // Usamos os dados parsados para achar quem morreu neste tick
-      const attacker = parsed.players.find((p) => p.steamId === steamId)
-      // Weapon: arma primária ou secundária do atacante
-      const weapon = attacker?.primary ?? attacker?.secondary ?? 'unknown'
-
-      // Headshot: verificar previously para vítima com hp > 0 e agora isAlive = false
-      // Simplificado: emitir kill com dados disponíveis
-      const killEvent = {
-        attacker: {
-          steamId,
-          name: allplayers[steamId]?.name ?? '',
-          team: allplayers[steamId]?.team ?? null,
-        },
-        victim: null, // CS2 GSI não fornece vítima diretamente na lista de kills
-        weapon,
-        headshot: false,
-        timestamp: Date.now(),
-      }
-
-      // Tentar detectar vítima via previously: jogador que estava vivo e agora está morto
-      if (req.body?.previously?.allplayers) {
-        for (const [victimId, prevData] of Object.entries(previously)) {
-          const prevHp = prevData?.state?.health ?? null
-          const currPlayer = allplayers[victimId]
-          const currHp = currPlayer?.state?.health ?? 0
-          if (prevHp !== null && prevHp > 0 && currHp === 0 && victimId !== steamId) {
-            killEvent.victim = {
-              steamId: victimId,
-              name: currPlayer?.name ?? '',
-              team: currPlayer?.team ?? null,
-            }
-            break
-          }
-        }
-      }
-
-      console.log(`[CS2 GSI] Kill: ${killEvent.attacker.name} → ${killEvent.victim?.name ?? '?'} (${weapon})`)
-      io.emit('cs2:kill', killEvent)
+  // Grava o primeiro payload com bomba plantada para análise
+  if (!payloadCaptured && req.body?.bomb?.state === 'planted') {
+    try {
+      fs.mkdirSync(EXAMPLES_DIR, { recursive: true })
+      fs.writeFileSync(PAYLOAD_CAPTURE_PATH, JSON.stringify(req.body, null, 2), 'utf-8')
+      payloadCaptured = true
+      console.log('[CS2 GSI] Payload capturado (bomba plantada) em examples/cs2-payload.json')
+    } catch (err) {
+      console.error('[CS2 GSI] Erro ao capturar payload:', err)
     }
   }
 
-  prevKillsMap = currentKillsMap
+  const parsed = parseCS2(req.body)
+  if (!parsed) return res.sendStatus(200)
 
   global.cs2State = parsed
   io.emit('cs2:gamestate', parsed)

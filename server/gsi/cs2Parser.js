@@ -46,9 +46,7 @@ const categorizeWeapons = (weaponsObj) => {
     if (name === 'weapon_knife') continue
     if (name === 'weapon_taser' || name === 'weapon_zeus') continue
     if (w.type === 'Knife') continue
-    if (w.name === 'weapon_c4') { hasBomb = true; continue }
 
-    // Kit de defuse não aparece como weapon, vem em allplayers_state
     if (GRENADES.has(name)) {
       grenades.push(name.replace('weapon_', ''))
     } else if (PISTOLS.has(name)) {
@@ -95,6 +93,7 @@ const parse = (payload) => {
         steamId,
         name: p.name ?? '',
         team: p.team ?? null,
+        observerSlot: p.observer_slot ?? 0,
         // Vida e armadura
         health: p.state?.health ?? 0,
         armor: p.state?.armor ?? 0,
@@ -109,9 +108,6 @@ const parse = (payload) => {
         // Estatísticas do round atual
         roundKills: p.state?.round_kills ?? 0,
         roundDamage: p.state?.round_totaldmg ?? 0,
-        // Dados extras — requer allplayers_extra_info no cfg
-        headshots: p.extra_info?.headshots ?? 0,
-        adr: p.extra_info?.adr ?? 0,
         // Economia
         money: p.state?.money ?? 0,
         equipValue: p.state?.equip_value ?? 0,
@@ -121,15 +117,6 @@ const parse = (payload) => {
         grenades: weapons.grenades,
         hasBomb: weapons.hasBomb,
         hasDefuseKit: p.state?.defusekit ?? false,
-        // Posição no mapa (requer allplayers_position no cfg)
-        position: p.position
-          ? (() => {
-              const parts = p.position.split(', ')
-              return parts.length === 3
-                ? { x: parseFloat(parts[0]), y: parseFloat(parts[1]), z: parseFloat(parts[2]) }
-                : null
-            })()
-          : null,
       }
     })
 
@@ -151,6 +138,10 @@ const parse = (payload) => {
     let observedPlayer = null
     if (player && player.steamid) {
       const weapons = categorizeWeapons(player.weapons)
+
+      // KDA vem de allplayers (mais confiável que payload.player.match_stats)
+      const fromAllPlayers = players.find((p) => p.steamId === player.steamid)
+
       observedPlayer = {
         steamId: player.steamid,
         name: player.name ?? '',
@@ -159,9 +150,9 @@ const parse = (payload) => {
         armor: player.state?.armor ?? 0,
         hasHelmet: player.state?.helmet ?? false,
         isAlive: (player.state?.health ?? 0) > 0,
-        kills: player.match_stats?.kills ?? 0,
-        deaths: player.match_stats?.deaths ?? 0,
-        assists: player.match_stats?.assists ?? 0,
+        kills: fromAllPlayers?.kills ?? player.match_stats?.kills ?? 0,
+        deaths: fromAllPlayers?.deaths ?? player.match_stats?.deaths ?? 0,
+        assists: fromAllPlayers?.assists ?? player.match_stats?.assists ?? 0,
         roundDamage: player.state?.round_totaldmg ?? 0,
         money: player.state?.money ?? 0,
         primary: weapons.primary,
@@ -169,7 +160,6 @@ const parse = (payload) => {
         grenades: weapons.grenades,
         hasBomb: weapons.hasBomb,
         hasDefuseKit: player.state?.defusekit ?? false,
-        // Ammo — disponível em player.weapons quando ativo
         ammoClip: null,
         ammoReserve: null,
       }

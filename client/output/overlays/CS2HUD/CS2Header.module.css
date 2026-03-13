@@ -6,35 +6,41 @@
 .header {
   display: flex;
   align-items: stretch;
-  height: 80px;
-  background: rgba(8, 10, 15, 0.96);
+  height: 84px;
+  background: rgba(8, 10, 15, 0.88);
   border-bottom: 2px solid rgba(255, 255, 255, 0.06);
   filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.8));
-  min-width: 700px;
+  min-width: 480px;
+  margin-top: 20px;
+  backdrop-filter: blur(10px);
 }
 
-/* Gradiente lateral por time */
+/* Lados dos times */
 .teamSide {
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 16px;
   padding: 0 24px;
-  background: linear-gradient(90deg, rgba(var(--side-color-r, 74), 158, 255, 0.08) 0%, transparent 100%);
 }
 
 .teamSideRight {
-  flex-direction: row-reverse;
-  background: linear-gradient(270deg, rgba(var(--side-color-r, 245), 166, 35, 0.08) 0%, transparent 100%);
+  justify-content: flex-start;
 }
 
-.teamName {
-  font-size: 18px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+.teamLogo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.5));
+}
+
+.scoreBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
 .score {
@@ -44,6 +50,29 @@
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  min-width: 44px;
+  text-align: center;
+}
+
+/* Map dots (series) */
+.mapDots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mapDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: inline-block;
+  transition: background 0.2s;
+}
+
+.mapDotFilled {
+  /* background set inline */
+  box-shadow: 0 0 4px rgba(255,255,255,0.3);
 }
 
 /* Centro */
@@ -53,11 +82,11 @@
   align-items: center;
   justify-content: center;
   gap: 2px;
-  padding: 0 28px;
+  padding: 0 24px;
   min-width: 160px;
-  border-left:  1px solid rgba(255, 255, 255, 0.08);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.18);
 }
 
 .timerRow {
@@ -73,14 +102,21 @@
   letter-spacing: 0.04em;
   line-height: 1;
   transition: color 0.3s ease;
+  color: #fff;
 }
 
 .timerFreeze {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   color: #5bc0eb;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.bombIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .timerBomb {
@@ -98,10 +134,33 @@
   animation: bombPulse 0.8s ease-in-out infinite;
 }
 
-.roundInfo {
+/* Series row */
+.seriesRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.seriesLabel {
   font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.seriesScore {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.roundInfo {
+  font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.35);
-  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.60);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }

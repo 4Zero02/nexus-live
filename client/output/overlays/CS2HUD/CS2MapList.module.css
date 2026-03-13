@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.75));
+  min-width: 240px;
+}
+
+.mapRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(9, 11, 18, 0.78);
+  backdrop-filter: blur(8px);
+  border-left: 3px solid rgba(255, 255, 255, 0.12);
+}
+
+.mapRow.upcoming {
+  background: rgba(9, 11, 18, 0.55);
+  border-left-color: rgba(255, 255, 255, 0.05);
+  opacity: 0.70;
+}
+
+.mapIndex {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.28);
+  font-variant-numeric: tabular-nums;
+  min-width: 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mapName {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pickedBy {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  min-width: 40px;
+  text-align: center;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.scoreLeft  { color: #fff; min-width: 20px; text-align: right; }
+.scoreSep   { color: rgba(255, 255, 255, 0.30); }
+.scoreRight { color: rgba(255, 255, 255, 0.55); min-width: 20px; text-align: left; }
+
+.upcoming {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
