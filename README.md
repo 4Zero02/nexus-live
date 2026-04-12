@@ -67,10 +67,6 @@ assets/             # Não versionado — gerenciado pelo designer
 | `overlay:update` | Atualiza dados sem esconder   |
 | `overlay:sync`   | Sincroniza estado ao conectar |
 
-## Jogos suportados
-
-League of Legends · Valorant · CS2 · Free Fire · Clash Royale · FIFA
-
 ## Configuração OBS
 
 1. Adicionar **Browser Source** no OBS

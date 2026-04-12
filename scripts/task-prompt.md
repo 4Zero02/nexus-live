@@ -112,7 +112,7 @@ git commit -m "tipo(escopo): descrição em português"
 ```
 
 Tipos: `feat`, `refactor`, `fix`, `chore`
-Escopos: `state`, `socket`, `registry`, `output`, `dashboard`, `lower-third`, `social-bug`, `scoreboard`, `timer`, `ticker`, `lottie`, `nav`, `pages`, `tasks`
+Escopos: `state`, `socket`, `registry`, `output`, `dashboard`, `lower-third`, `social-bug`, `ticker`, `lottie`, `nav`, `pages`, `tasks`
 
 Exemplos:
 - `feat(state): adicionar funções createInstance e deleteInstance`

@@ -26,9 +26,6 @@ export default defineConfig({
       },
       '/assets/file': {
         target: 'http://localhost:8765'
-      },
-      '/gsi': {
-        target: 'http://localhost:8765'
       }
     }
   }
